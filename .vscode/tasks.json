@@ -1,0 +1,79 @@
+{
+    "version": "2.0.0",
+
+    "tasks": [
+
+        {
+            "label": "Meson Setup",
+
+            "type": "shell",
+
+            "command":
+            "meson setup build",
+
+            "problemMatcher": []
+        },
+
+
+        {
+            "label": "Ninja Build",
+
+            "type": "shell",
+
+            "command":
+            "(ninja -C build) -and (./build/first_opengl_project.exe)",
+
+            "group":
+            {
+                "kind": "build",
+                "isDefault": true
+            },
+
+            "problemMatcher":
+            [
+                "$gcc"
+            ],
+
+            "dependsOn":
+            [
+                "Meson Setup"
+            ],
+
+            "dependsOrder":
+            "sequence"
+        },
+
+
+        {
+            "label": "Run OpenGL",
+
+            "type": "shell",
+
+            "command":
+            "${workspaceFolder}/build/first_opengl_project.exe",
+
+            "problemMatcher": []
+        },
+
+
+        {
+            "label": "Build and Run",
+
+            "dependsOn":
+            [
+                "Ninja Build",
+                "Run OpenGL"
+            ],
+
+            "dependsOrder":
+            "sequence",
+
+            "group":
+            {
+                "kind":"build",
+                "isDefault":false
+            }
+        }
+
+    ]
+}
